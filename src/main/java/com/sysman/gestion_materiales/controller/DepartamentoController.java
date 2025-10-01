@@ -2,7 +2,13 @@ package com.sysman.gestion_materiales.controller;
 
 import com.sysman.gestion_materiales.entity.Departamento;
 import com.sysman.gestion_materiales.service.DepartamentoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -58,7 +64,7 @@ public class DepartamentoController {
     public ResponseEntity<Departamento> update(@PathVariable String codigo, @RequestBody Departamento departamento) {
         return ResponseEntity.ok(service.update(codigo, departamento));
     }
-
+    
     @Operation(summary = "Eliminar Departamento", description = "Elimina un departamento por su código")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Departamento eliminado con éxito"),
