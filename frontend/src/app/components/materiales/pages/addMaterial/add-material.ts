@@ -34,7 +34,7 @@ import { RouterModule } from '@angular/router';
 export class AddMaterial implements OnInit {
   materialForm!: FormGroup;
   estados = Object.values(EstadoMaterial);
-  ciudades: Ciudad[] = [];  // 👈 plural, más claro
+  ciudades: Ciudad[] = []; 
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +54,7 @@ export class AddMaterial implements OnInit {
       ciudadCodigo: ['', Validators.required]
     });
 
-    // cargar ciudades
+    // cargar las ciudades desde el servicio para la seleccion al crear un nuevo material;
     this.ciudadService.getCiudades().subscribe({
       next: (data) => this.ciudades = data,
       error: (err) => console.error('Error cargando ciudades', err)

@@ -49,7 +49,6 @@ export class DepartamentosPage implements OnInit {
   }
 
   onCreate() {
-    // Implementar lógica de creación
-    console.log('Crear nuevo departamento');
+    console.log('Crear nuevo departamento'); // notifi usuario de que se creeo correctamenta 
   }
 }

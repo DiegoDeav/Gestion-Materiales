@@ -58,14 +58,10 @@ export class EditMaterial implements OnInit {
       estado: [EstadoMaterial.ACTIVO, Validators.required],
       ciudadCodigo: ['', Validators.required]
     });
-
-    // Cargar ciudades
     this.ciudadService.getCiudades().subscribe({
       next: (data) => this.ciudades = data,
       error: (err) => console.error('Error cargando ciudades', err)
     });
-
-    // Cargar material existente
     this.loadMaterial();
   }
 

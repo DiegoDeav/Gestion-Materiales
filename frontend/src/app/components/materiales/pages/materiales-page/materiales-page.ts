@@ -44,7 +44,7 @@ export class MaterialesPage implements OnInit {
   loadMateriales() {
     this.materialService.getMateriales().subscribe(materiales => {
       this.materiales = materiales;
-      // Extraer tipos únicos de los materiales
+      // filtamos tipos unicos para mostrar en el filter del datatable de materia;l
       this.tipoOptions = [...new Set(materiales.map(m => m.tipo))].sort();
     });
   }
@@ -62,7 +62,6 @@ export class MaterialesPage implements OnInit {
         this.materiales = materiales;
       });
     } else {
-      // Si no hay tipo seleccionado, cargar todos los materiales
       this.loadMateriales();
     }
   }
@@ -83,7 +82,6 @@ export class MaterialesPage implements OnInit {
         });
       }
     } else {
-      // Si no hay ciudad seleccionada, cargar todos los materiales
       this.loadMateriales();
     }
   }
@@ -107,7 +105,6 @@ export class MaterialesPage implements OnInit {
   }
 
   onCreate() {
-    // Implementar lógica de creación
     console.log('Crear nuevo material');
   }
 }

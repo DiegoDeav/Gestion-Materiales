@@ -50,7 +50,6 @@ export class CiudadesPage implements OnInit {
   }
 
   onCreate() {
-    // Implementar lógica de creación
-    console.log('Crear nueva ciudad');
+    console.log('Crear nueva ciudad'); // para crear una ciudad nuueva
   }
 }

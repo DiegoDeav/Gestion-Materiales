@@ -14,7 +14,7 @@ mat-toolbar {
 
 mat-sidenav-container {
   flex: 1;
-  margin-top: 64px; /* altura del toolbar */
+  margin-top: 64px;
 }
 
 mat-sidenav {
@@ -25,9 +25,9 @@ mat-sidenav-content {
   padding: 20px;
 }
 
-/* Estilos para dispositivos móviles */
-@media (max-width: 600px) {
+@media (max-width: 600px) { 
   mat-sidenav-container {
-    margin-top: 56px; /* altura del toolbar en móviles */
+    margin-top: 56px; 
+    /* altura en dispositivos mobiles, un poco de responsive  */
   }
 }
