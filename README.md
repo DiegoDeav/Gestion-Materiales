@@ -3,7 +3,7 @@
 Repositorio para el versionamiento del proyecto **Gestión de Materiales**.  
 Este proyecto implementa un **CRUD completo** para la entidad **Materiales** y operaciones básicas sobre **Ciudades** y **Departamentos**, usando:
 
-- **Backend**: Spring Boot (Java 17), Maven, JPA/Hibernate, Lombok, Swagger, PostgreSQL.
+- **Backend**: Spring Boot (Java 21), Maven, JPA/Hibernate, Lombok, Swagger, PostgreSQL.
 - **Frontend**: Angular, Angular Material, CSS.
 - **Base de datos**: PostgreSQL.
 
@@ -12,7 +12,7 @@ Este proyecto implementa un **CRUD completo** para la entidad **Materiales** y o
 ## Estructura del Proyecto
 El repositorio está organizado en un **monorepo**:
 - `frontend/` → Aplicación Angular (UI).
-- `backend/` → Proyecto Spring Boot (API REST + persistencia).
+- `./` → Proyecto Spring Boot (API REST + persistencia).
 - Otros archivos de configuración en la raíz (Maven, Git, etc.).
 
 ---
@@ -23,3 +23,18 @@ El repositorio está organizado en un **monorepo**:
    ```bash
    git clone <url-del-repositorio>
    cd gestion-materiales
+
+   mvn spring-boot:run // para ejecutar el backend no se encuentra en la raiz del proyecto
+
+Ejecutar frontend
+
+cd frontend
+npm install
+npm start
+
+
+Acceder a la aplicación
+
+UI: http://localhost:4200/
+
+API: http://localhost:8080/swagger-ui.html
