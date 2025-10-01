@@ -7,27 +7,27 @@ import { Ciudad } from '../models/ciudad.model';
   providedIn: 'root'
 })
 export class CiudadService {
-  private apiUrl = 'api/ciudades';
+  private apiUrl = '/api/ciudades';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getCiudades(): Observable<Ciudad[]> {
     return this.http.get<Ciudad[]>(this.apiUrl);
   }
 
-  getCiudad(id: number): Observable<Ciudad> {
-    return this.http.get<Ciudad>(`${this.apiUrl}/${id}`);
+  getCiudad(codigo: string): Observable<Ciudad> {
+    return this.http.get<Ciudad>(`${this.apiUrl}/${codigo}`);
   }
 
   createCiudad(ciudad: Ciudad): Observable<Ciudad> {
     return this.http.post<Ciudad>(this.apiUrl, ciudad);
   }
 
-  updateCiudad(id: number, ciudad: Ciudad): Observable<Ciudad> {
-    return this.http.put<Ciudad>(`${this.apiUrl}/${id}`, ciudad);
+  updateCiudad(codigo: string, ciudad: Ciudad): Observable<Ciudad> {
+    return this.http.put<Ciudad>(`${this.apiUrl}/${codigo}`, ciudad);
   }
 
-  deleteCiudad(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteCiudad(codigo: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${codigo}`);
   }
 }

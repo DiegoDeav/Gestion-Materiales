@@ -1,11 +1,22 @@
+export enum EstadoMaterial {
+    ACTIVO = 'ACTIVO',
+    DISPONIBLE = 'DISPONIBLE',
+    ASIGNADO = 'ASIGNADO'
+}
+
+export interface Ciudad {
+  codigo: string;
+  nombre: string;
+}
+
 export interface Material {
-    id?: number;
-    codigo: string;
-    nombre: string;
-    descripcion: string;
-    tipo: string;
-    fechaCompra: string;
-    estado: string;
-    cantidad: number;
-    ciudad: string;
+  id?: number;
+  nombre: string;
+  descripcion?: string;
+  tipo: string;
+  precio: number;
+  fechaCompra: Date;
+  fechaVenta?: Date;
+  estado: EstadoMaterial;
+  ciudad: Ciudad;
 }

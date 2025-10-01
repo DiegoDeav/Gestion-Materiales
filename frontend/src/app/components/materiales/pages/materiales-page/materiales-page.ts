@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataTable } from '../../../ui/data-table/data-table';
+import { DataTable, DataTableColumn } from '../../../ui/data-table/data-table';
 import { Material } from '../../models/material.model';
 import { MaterialService } from '../../services/material.service';
 
@@ -13,21 +13,19 @@ import { MaterialService } from '../../services/material.service';
 })
 export class MaterialesPage implements OnInit {
   materiales: Material[] = [];
-  columns = [
-    { field: 'codigo', header: 'Código' },
-    { field: 'nombre', header: 'Nombre' },
-    { field: 'descripcion', header: 'Descripción' },
-    { field: 'tipo', header: 'Tipo' },
-    { field: 'fechaCompra', header: 'Fecha de Compra' },
-    { field: 'estado', header: 'Estado' },
-    { field: 'cantidad', header: 'Cantidad' },
-    { field: 'ciudad', header: 'Ciudad' }
-  ];
+  columns: DataTableColumn[] = [
+  { header: 'Código', field: 'id' },
+  { header: 'Nombre', field: 'nombre' },
+  { header:'descripcion', field: 'descripcion'},
+  {header: 'precio', field: 'precio'},
+  { header: 'Ciudad', valueGetter: (item) => item.ciudad?.nombre },
+  { header: 'Departamento', valueGetter: (item) => item.ciudad?.departamento?.nombre},
+];
 
   constructor(private materialService: MaterialService) {}
 
   tipoOptions = ['Herramienta', 'Consumible', 'Equipo', 'Repuesto'];
-  ciudadOptions: string[] = ['Bogotá', 'Medellín', 'Cali', 'Barranquilla']; // You should get this from your backend
+  ciudadOptions: string[] = ['Bogotá', 'Medellín', 'Cali', 'Barranquilla'];
 
   ngOnInit() {
     this.loadMateriales();

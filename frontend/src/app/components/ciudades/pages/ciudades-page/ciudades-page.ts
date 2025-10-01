@@ -37,8 +37,8 @@ export class CiudadesPage implements OnInit {
   }
 
   onDelete(ciudad: Ciudad) {
-    if (ciudad.id) {
-      this.ciudadService.deleteCiudad(ciudad.id).subscribe(() => {
+    if (ciudad.codigo) {
+      this.ciudadService.deleteCiudad(ciudad.codigo).subscribe(() => {
         this.loadCiudades();
       });
     }

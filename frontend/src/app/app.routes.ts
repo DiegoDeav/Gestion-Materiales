@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { MaterialesPage } from './components/materiales/pages/materiales-page/materiales-page';
 import { CiudadesPage } from './components/ciudades/pages/ciudades-page/ciudades-page';
 import { DepartamentosPage } from './components/departamentos/pages/departamentos-page/departamentos-page';
+import { AddMaterial} from './components/materiales/pages/addMaterial/add-material';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
         path: 'departamentos',
         component: DepartamentosPage
+    },
+    {
+        path: 'materiales/nuevo',
+        component: AddMaterial
     }
 ];

@@ -3,6 +3,7 @@
     [data]="departamentos"
     [columns]="columns"
     [tableTitle]="'Departamentos'"
+    [createRoute]="'/departamentos/nuevo'"
     (edit)="onEdit($event)"
     (delete)="onDelete($event)"
     (create)="onCreate()">

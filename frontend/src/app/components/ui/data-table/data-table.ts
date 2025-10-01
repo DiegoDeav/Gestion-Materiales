@@ -8,6 +8,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
+
+export interface DataTableColumn {
+  header: string;
+  field?: string;
+  valueGetter?: (item: any) => any;
+}
 
 @Component({
   selector: 'app-data-table',
@@ -21,14 +28,16 @@ import { MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   templateUrl: './data-table.html',
   styleUrl: './data-table.css'
 })
 export class DataTable {
   @Input() data: any[] = [];
-  @Input() columns: { field: string; header: string }[] = [];
+  @Input() createRoute: string = '';
+  @Input() columns: DataTableColumn[] = [];
   @Input() actions: boolean = true;
   @Input() tableTitle: string = 'Data Table';
   
@@ -84,4 +93,8 @@ export class DataTable {
     this.filterCity = '';
     this.clearFilters.emit();
   }
+
+  getCellValue(item: any, col: DataTableColumn) {
+  return col.valueGetter ? col.valueGetter(item) : item[col.field ?? ''];
+}
 }
