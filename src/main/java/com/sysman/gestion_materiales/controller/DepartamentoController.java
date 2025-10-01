@@ -11,13 +11,28 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/departamentos")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DepartamentoController {
 
     private final DepartamentoService service;
     public DepartamentoController(DepartamentoService service) {
         this.service = service;
+    }
+
+    @Operation(summary = "Obtener todos los Departamentos", description = "Retorna una lista de todos los departamentos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Departamentos encontrados"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    @GetMapping
+    public ResponseEntity<List<Departamento>> getAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
     @Operation(summary = "Obtener Departamento por Código", description = "Busca un departamento por su código")
