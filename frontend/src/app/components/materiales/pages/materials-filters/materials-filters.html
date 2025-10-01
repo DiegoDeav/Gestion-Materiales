@@ -1,0 +1,30 @@
+<form [formGroup]="filterForm" class="filters">
+  <!-- Tipo -->
+  <mat-form-field>
+    <mat-label>Filtrar por Tipo</mat-label>
+    <mat-select formControlName="tipo" (selectionChange)="aplicarFiltros()">
+      <mat-option value="">Todos</mat-option>
+      <mat-option *ngFor="let t of tipos" [value]="t">{{ t }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Fecha -->
+  <mat-form-field>
+    <mat-label>Filtrar por Fecha</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="fecha" (dateChange)="aplicarFiltros()">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- Ciudad -->
+  <mat-form-field>
+    <mat-label>Filtrar por Ciudad</mat-label>
+    <mat-select formControlName="ciudad" (selectionChange)="aplicarFiltros()">
+      <mat-option value="">Todas</mat-option>
+      <mat-option *ngFor="let c of ciudades" [value]="c">{{ c }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Limpiar -->
+  <button mat-button color="warn" (click)="limpiarFiltros()">Limpiar Filtros</button>
+</form>

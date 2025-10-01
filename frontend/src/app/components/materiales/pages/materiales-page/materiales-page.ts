@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { DataTable, DataTableColumn } from '../../../ui/data-table/data-table';
 import { Material } from '../../models/material.model';
 import { MaterialService } from '../../services/material.service';
+import { CiudadService } from '../../../ciudades/services/ciudad.service';
+import { Ciudad } from '../../../ciudades/models/ciudad.model';
 
 @Component({
   selector: 'app-materiales-page',
@@ -14,33 +17,54 @@ import { MaterialService } from '../../services/material.service';
 export class MaterialesPage implements OnInit {
   materiales: Material[] = [];
   columns: DataTableColumn[] = [
-  { header: 'Código', field: 'id' },
-  { header: 'Nombre', field: 'nombre' },
-  { header:'descripcion', field: 'descripcion'},
-  {header: 'precio', field: 'precio'},
-  { header: 'Ciudad', valueGetter: (item) => item.ciudad?.nombre },
-  { header: 'Departamento', valueGetter: (item) => item.ciudad?.departamento?.nombre},
-];
+    { header: 'Código', field: 'id' },
+    { header: 'Nombre', field: 'nombre' },
+    { header: 'Descripción', field: 'descripcion' },
+    { header: 'Tipo', field: 'tipo' },
+    { header: 'Precio', field: 'precio' },
+    { header: 'Ciudad', valueGetter: (item) => item.ciudad?.nombre },
+    { header: 'Departamento', valueGetter: (item) => item.ciudad?.departamento?.nombre }
+  ];
 
-  constructor(private materialService: MaterialService) {}
+  constructor(
+    private materialService: MaterialService,
+    private ciudadService: CiudadService,
+    private router: Router
+  ) {}
 
-  tipoOptions = ['Herramienta', 'Consumible', 'Equipo', 'Repuesto'];
-  ciudadOptions: string[] = ['Bogotá', 'Medellín', 'Cali', 'Barranquilla'];
+  tipoOptions: string[] = [];
+  ciudadOptions: string[] = [];
+  ciudades: Ciudad[] = [];
 
   ngOnInit() {
     this.loadMateriales();
+    this.loadCiudades();
   }
 
   loadMateriales() {
     this.materialService.getMateriales().subscribe(materiales => {
       this.materiales = materiales;
+      // Extraer tipos únicos de los materiales
+      this.tipoOptions = [...new Set(materiales.map(m => m.tipo))].sort();
+    });
+  }
+
+  loadCiudades() {
+    this.ciudadService.getCiudades().subscribe(ciudades => {
+      this.ciudades = ciudades;
+      this.ciudadOptions = ciudades.map(ciudad => ciudad.nombre);
     });
   }
 
   onFilterByType(tipo: string) {
-    this.materialService.getMaterialesByTipo(tipo).subscribe(materiales => {
-      this.materiales = materiales;
-    });
+    if (tipo && tipo.trim() !== '') {
+      this.materialService.getMaterialesByTipo(tipo).subscribe(materiales => {
+        this.materiales = materiales;
+      });
+    } else {
+      // Si no hay tipo seleccionado, cargar todos los materiales
+      this.loadMateriales();
+    }
   }
 
   onFilterByDate(fecha: string) {
@@ -49,10 +73,19 @@ export class MaterialesPage implements OnInit {
     });
   }
 
-  onFilterByCity(ciudad: string) {
-    this.materialService.getMaterialesByCiudad(ciudad).subscribe(materiales => {
-      this.materiales = materiales;
-    });
+  onFilterByCity(ciudadNombre: string) {
+    if (ciudadNombre && ciudadNombre.trim() !== '') {
+      // Buscar el código de la ciudad por su nombre
+      const ciudad = this.ciudades.find(c => c.nombre === ciudadNombre);
+      if (ciudad) {
+        this.materialService.getMaterialesByCiudad(ciudad.codigo).subscribe(materiales => {
+          this.materiales = materiales;
+        });
+      }
+    } else {
+      // Si no hay ciudad seleccionada, cargar todos los materiales
+      this.loadMateriales();
+    }
   }
 
   onClearFilters() {
@@ -60,8 +93,9 @@ export class MaterialesPage implements OnInit {
   }
 
   onEdit(material: Material) {
-    // Implementar lógica de edición
-    console.log('Editar material:', material);
+    if (material.id) {
+      this.router.navigate(['/materiales/editar', material.id]);
+    }
   }
 
   onDelete(material: Material) {

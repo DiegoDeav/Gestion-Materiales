@@ -69,9 +69,7 @@ export class DataTable {
   }
 
   onFilterByType() {
-    if (this.filterType) {
-      this.filterByType.emit(this.filterType);
-    }
+    this.filterByType.emit(this.filterType);
   }
 
   onFilterByDate() {
@@ -82,9 +80,7 @@ export class DataTable {
   }
 
   onFilterByCity() {
-    if (this.filterCity) {
-      this.filterByCity.emit(this.filterCity);
-    }
+    this.filterByCity.emit(this.filterCity);
   }
 
   onClearFilters() {
@@ -95,6 +91,6 @@ export class DataTable {
   }
 
   getCellValue(item: any, col: DataTableColumn) {
-  return col.valueGetter ? col.valueGetter(item) : item[col.field ?? ''];
-}
+    return col.valueGetter ? col.valueGetter(item) : item[col.field ?? ''];
+  }
 }

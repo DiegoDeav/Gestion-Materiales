@@ -15,19 +15,19 @@ export class DepartamentoService {
     return this.http.get<Departamento[]>(this.apiUrl);
   }
 
-  getDepartamento(id: number): Observable<Departamento> {
-    return this.http.get<Departamento>(`${this.apiUrl}/${id}`);
+  getDepartamento(codigo: string): Observable<Departamento> {
+    return this.http.get<Departamento>(`${this.apiUrl}/${codigo}`);
   }
 
   createDepartamento(departamento: Departamento): Observable<Departamento> {
     return this.http.post<Departamento>(this.apiUrl, departamento);
   }
 
-  updateDepartamento(id: number, departamento: Departamento): Observable<Departamento> {
-    return this.http.put<Departamento>(`${this.apiUrl}/${id}`, departamento);
+  updateDepartamento(codigo: string, departamento: Departamento): Observable<Departamento> {
+    return this.http.put<Departamento>(`${this.apiUrl}/${codigo}`, departamento);
   }
 
-  deleteDepartamento(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteDepartamento(codigo: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${codigo}`);
   }
 }

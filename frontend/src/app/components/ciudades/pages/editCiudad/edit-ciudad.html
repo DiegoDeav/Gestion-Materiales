@@ -1,0 +1,33 @@
+<div class="edit-ciudad-container">
+  <h2>Editar Ciudad</h2>
+  
+  <form [formGroup]="ciudadForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Código</mat-label>
+      <input matInput formControlName="codigo" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Departamento</mat-label>
+      <mat-select formControlName="departamentoCodigo">
+        <mat-option *ngFor="let d of departamentos" [value]="d.codigo">
+          {{ d.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-group">
+      <button mat-raised-button color="primary" type="submit">
+        Actualizar Ciudad
+      </button>
+      <button mat-button type="button" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

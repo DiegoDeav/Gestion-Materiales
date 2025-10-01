@@ -1,0 +1,24 @@
+<div class="edit-departamento-container">
+  <h2>Editar Departamento</h2>
+  
+  <form [formGroup]="departamentoForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Código</mat-label>
+      <input matInput formControlName="codigo" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" required>
+    </mat-form-field>
+
+    <div class="button-group">
+      <button mat-raised-button color="primary" type="submit">
+        Actualizar Departamento
+      </button>
+      <button mat-button type="button" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

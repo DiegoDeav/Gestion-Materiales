@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataTable } from '../../../ui/data-table/data-table';
+import { Router } from '@angular/router';
+import { DataTable, DataTableColumn } from '../../../ui/data-table/data-table';
 import { Departamento } from '../../models/departamento.model';
 import { DepartamentoService } from '../../services/departamento.service';
 
@@ -13,12 +14,15 @@ import { DepartamentoService } from '../../services/departamento.service';
 })
 export class DepartamentosPage implements OnInit {
   departamentos: Departamento[] = [];
-  columns = [
-    { field: 'codigo', header: 'Código' },
-    { field: 'nombre', header: 'Nombre' }
+  columns: DataTableColumn[] = [
+    { header: 'Código', field: 'codigo' },
+    { header: 'Nombre', field: 'nombre' }
   ];
 
-  constructor(private departamentoService: DepartamentoService) {}
+  constructor(
+    private departamentoService: DepartamentoService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadDepartamentos();
@@ -31,13 +35,14 @@ export class DepartamentosPage implements OnInit {
   }
 
   onEdit(departamento: Departamento) {
-    // Implementar lógica de edición
-    console.log('Editar departamento:', departamento);
+    if (departamento.codigo) {
+      this.router.navigate(['/departamentos/editar', departamento.codigo]);
+    }
   }
 
   onDelete(departamento: Departamento) {
-    if (departamento.id) {
-      this.departamentoService.deleteDepartamento(departamento.id).subscribe(() => {
+    if (departamento.codigo) {
+      this.departamentoService.deleteDepartamento(departamento.codigo).subscribe(() => {
         this.loadDepartamentos();
       });
     }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DataTable } from '../../../ui/data-table/data-table';
+import { Router } from '@angular/router';
+import { DataTable, DataTableColumn } from '../../../ui/data-table/data-table';
 import { Ciudad } from '../../models/ciudad.model';
 import { CiudadService } from '../../services/ciudad.service';
 
@@ -13,13 +14,16 @@ import { CiudadService } from '../../services/ciudad.service';
 })
 export class CiudadesPage implements OnInit {
   ciudades: Ciudad[] = [];
-  columns = [
-    { field: 'codigo', header: 'Código' },
-    { field: 'nombre', header: 'Nombre' },
-    { field: 'departamentoId', header: 'ID Departamento' }
+  columns: DataTableColumn[] = [
+    { header: 'Código', field: 'codigo' },
+    { header: 'Nombre', field: 'nombre' },
+    { header: 'Departamento', valueGetter: (item) => item.departamento?.nombre }
   ];
 
-  constructor(private ciudadService: CiudadService) {}
+  constructor(
+    private ciudadService: CiudadService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadCiudades();
@@ -32,8 +36,9 @@ export class CiudadesPage implements OnInit {
   }
 
   onEdit(ciudad: Ciudad) {
-    // Implementar lógica de edición
-    console.log('Editar ciudad:', ciudad);
+    if (ciudad.codigo) {
+      this.router.navigate(['/ciudades/editar', ciudad.codigo]);
+    }
   }
 
   onDelete(ciudad: Ciudad) {
