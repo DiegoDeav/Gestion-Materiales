@@ -38,3 +38,12 @@ Acceder a la aplicación
 UI: http://localhost:4200/
 
 API: http://localhost:8080/swagger-ui.html
+
+
+Limites
+
+En el frontend, solo la entidad Materiales cuenta con CRUD completo.
+
+Ciudades y Departamentos permiten editar y eliminar, pero no registrar nuevos desde UI.
+
+La validación de fechas se ejecuta en backend, sin mostrar un mensaje detallado en UI.
