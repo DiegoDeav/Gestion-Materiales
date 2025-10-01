@@ -1,0 +1,16 @@
+<div class="materiales-page">
+  <app-data-table
+    [data]="materiales"
+    [columns]="columns"
+    [tableTitle]="'Materiales'"
+    [tipoOptions]="tipoOptions"
+    [ciudadOptions]="ciudadOptions"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (create)="onCreate()"
+    (filterByType)="onFilterByType($event)"
+    (filterByDate)="onFilterByDate($event)"
+    (filterByCity)="onFilterByCity($event)"
+    (clearFilters)="onClearFilters()">
+  </app-data-table>
+</div>

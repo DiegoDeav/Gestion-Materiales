@@ -1,0 +1,10 @@
+<div class="ciudades-page">
+  <app-data-table
+    [data]="ciudades"
+    [columns]="columns"
+    [tableTitle]="'Ciudades'"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (create)="onCreate()">
+  </app-data-table>
+</div>

@@ -1,0 +1,10 @@
+<div class="departamentos-page">
+  <app-data-table
+    [data]="departamentos"
+    [columns]="columns"
+    [tableTitle]="'Departamentos'"
+    (edit)="onEdit($event)"
+    (delete)="onDelete($event)"
+    (create)="onCreate()">
+  </app-data-table>
+</div>

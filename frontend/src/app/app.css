@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+mat-sidenav-container {
+  flex: 1;
+  margin-top: 64px; /* altura del toolbar */
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+mat-sidenav-content {
+  padding: 20px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 600px) {
+  mat-sidenav-container {
+    margin-top: 56px; /* altura del toolbar en móviles */
+  }
+}
