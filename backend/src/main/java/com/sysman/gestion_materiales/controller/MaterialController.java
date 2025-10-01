@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/Materiales")
+@CrossOrigin(origins = "http://localhost:4200")
 @Tag(name = "Materiales", description = "Operacion de servicio CRUD para Materiales")
 public class MaterialController {
     private final MaterialService service;
