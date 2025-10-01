@@ -20,7 +20,6 @@ public class MaterialServiceImpl implements MaterialService{
     public List<Material> findAll() {
         return repository.findAll();
     }
-
     @Override
     public Material findById(Long id) {
         return repository.findById(id)

@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/Materiales")
+@RequestMapping("/api/materiales")
 @CrossOrigin(origins = "http://localhost:4200")
 @Tag(name = "Materiales", description = "Operacion de servicio CRUD para Materiales")
 public class MaterialController {
@@ -63,7 +63,7 @@ public class MaterialController {
         return ResponseEntity.ok(service.findByCiudad(codigo));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Material> create(@RequestBody Material material){
         return  ResponseEntity.ok(service.save(material));
     }
